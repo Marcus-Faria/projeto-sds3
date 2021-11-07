@@ -23,14 +23,16 @@ function BarChart() {
         labels: {
             categories: []
         },
-        series: {
-            name: "",
-            data: []
-        }
+        series: [
+            {
+                name: "",
+                data: []
+            }
+        ]
     });
 
     useEffect(() => {
-        axios.get("${BASE_URL}/sales/success-by-seller").then(() => {
+        axios.get("${BASE_URL}/sales/success-by-seller").then(response => {
             const data = response.data as SaleSuccess[];
             const myLabels = data.map((x) => x.sellerName);
             const mySeries = data.map((x) => round(100.0 * x.deals / x.visited, 1));
@@ -39,10 +41,12 @@ function BarChart() {
                 labels: {
                     categories: myLabels
                 },
-                series: {
-                    name: "% Seccess",
-                    data: mySeries
-                },
+                series: [
+                    {
+                        name: "% Seccess",
+                        data: mySeries
+                    },
+                ]
             });
         });
     }, []);
