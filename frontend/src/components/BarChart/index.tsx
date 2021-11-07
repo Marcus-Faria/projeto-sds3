@@ -32,7 +32,7 @@ function BarChart() {
     });
 
     useEffect(() => {
-        axios.get("${BASE_URL}/sales/success-by-seller").then(response => {
+        axios.get(`${BASE_URL}/sales/success-by-seller`).then(response => {
             const data = response.data as SaleSuccess[];
             const myLabels = data.map((x) => x.sellerName);
             const mySeries = data.map((x) => round(100.0 * x.deals / x.visited, 1));
